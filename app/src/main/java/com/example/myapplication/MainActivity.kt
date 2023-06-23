@@ -37,7 +37,12 @@ class MainActivity : AppCompatActivity() {
         mapView.getMapAsync { googleMap ->
             this.googleMap = googleMap
             // Configurar el mapa según tus preferencias
-            googleMap.mapType = GoogleMap.MAP_TYPE_NORMAL // Establecer el tipo de mapa deseado
+            // Establecer el tipo de mapa deseado
+            googleMap.mapType = GoogleMap.MAP_TYPE_NORMAL
+            // Activar controles de zoom
+            googleMap.uiSettings.isZoomControlsEnabled = true
+            // Activar gestos de zoom
+            googleMap.uiSettings.isZoomGesturesEnabled = true
         }
         locationManager = getSystemService(LOCATION_SERVICE) as LocationManager
 
