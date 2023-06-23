@@ -18,6 +18,8 @@ import com.google.android.gms.maps.MapView
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
+import kotlin.math.roundToInt
+import kotlin.math.roundToLong
 
 class MainActivity : AppCompatActivity() {
     private lateinit var locationManager: LocationManager
@@ -105,7 +107,7 @@ class MainActivity : AppCompatActivity() {
                 override fun onLocationChanged(location: Location) {
                     val latitude = location.latitude
                     val longitude = location.longitude
-                    val locationText = "Lat: $latitude  \nLong: $longitude"
+                    val locationText = "Lat: ${latitude.toFloat()}  \nLong: ${longitude.toFloat()}"
                     locationAdapter.add(locationText)
                     locationList.smoothScrollToPosition(locationAdapter.count - 1)
                     val markerOptions = MarkerOptions()
@@ -134,7 +136,7 @@ class MainActivity : AppCompatActivity() {
                 locationListener
             )
         } else {
-            Toast.makeText(this, "Location permission not granted", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "Permisos de ubicacion denegados", Toast.LENGTH_SHORT).show()
         }
     }
 
@@ -147,9 +149,9 @@ class MainActivity : AppCompatActivity() {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         if (requestCode == LOCATION_PERMISSION_REQUEST_CODE) {
             if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                Toast.makeText(this, "Location permission granted", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Permisos de Ubicacion Activados", Toast.LENGTH_SHORT).show()
             } else {
-                Toast.makeText(this, "Location permission denied", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Permisos de Ubicacion Denegados", Toast.LENGTH_SHORT).show()
             }
         }
     }
